@@ -9,18 +9,18 @@ const categories = [
 
 export default function FlavorRatingApp() {
   const [ratings, setRatings] = useState({
-    sweetness: 3.5,
-    menthol: 2,
-    throatHit: 4.5,
+    sweetness: 0,
+    menthol: 0,
+    throatHit: 0,
   });
 
   const [canvasSize, setCanvasSize] = useState({
-    width: 400,
+    width: 800,
     height: 250,
   });
 
   const [inputValues, setInputValues] = useState({
-    width: '400',
+    width: '800',
     height: '250',
   });
 
@@ -146,14 +146,14 @@ export default function FlavorRatingApp() {
                 <label className="input-label">가로 (px):</label>
                 <input
                   type="text"
-                  placeholder="400"
+                  placeholder="800"
                   value={inputValues.width}
                   onChange={(e) => {
                     const value = e.target.value;
                     setInputValues((prev) => ({ ...prev, width: value }));
 
                     if (value === '') {
-                      setCanvasSize((prev) => ({ ...prev, width: 400 }));
+                      setCanvasSize((prev) => ({ ...prev, width: 800 }));
                     } else {
                       const numValue = parseInt(value);
                       if (!isNaN(numValue) && numValue >= 200) {
