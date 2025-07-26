@@ -1,4 +1,5 @@
 import { useRef, useEffect, useState, useCallback } from 'react';
+import './App.css';
 
 const categories = [
   { label: '당도', color: 'orange', key: 'sweetness' },
@@ -129,45 +130,20 @@ export default function FlavorRatingApp() {
   };
 
   return (
-    <div
-      style={{
-        padding: '2rem',
-        fontFamily: 'sans-serif',
-        maxWidth: '1200px',
-        margin: '0 auto',
-      }}
-    >
-      <h1 style={{ textAlign: 'center', color: '#333', marginBottom: '2rem' }}>
-        맛 표현 이미지 생성기
-      </h1>
+    <div className="app-container">
+      <h1 className="app-title">맛 표현 이미지 생성기</h1>
 
-      <div
-        style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}
-      >
-        {/* 왼쪽: 설정 패널 */}
-        <div
-          style={{
-            background: '#f8f9fa',
-            padding: '1.5rem',
-            borderRadius: '8px',
-          }}
-        >
-          <h2 style={{ marginTop: 0, color: '#333' }}>설정</h2>
+      <div className="app-layout">
+        {/* 설정 패널 */}
+        <div className="settings-panel">
+          <h2 className="settings-title">설정</h2>
 
           {/* 캔버스 크기 설정 */}
-          <div style={{ marginBottom: '2rem' }}>
-            <h3 style={{ marginBottom: '1rem', color: '#555' }}>이미지 크기</h3>
-            <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-              <div>
-                <label
-                  style={{
-                    display: 'block',
-                    marginBottom: '0.5rem',
-                    color: '#666',
-                  }}
-                >
-                  가로 (px):
-                </label>
+          <div className="image-size-section">
+            <h3 className="section-title">이미지 크기</h3>
+            <div className="size-inputs">
+              <div className="input-group">
+                <label className="input-label">가로 (px):</label>
                 <input
                   type="text"
                   placeholder="400"
@@ -180,11 +156,7 @@ export default function FlavorRatingApp() {
                       setCanvasSize((prev) => ({ ...prev, width: 400 }));
                     } else {
                       const numValue = parseInt(value);
-                      if (
-                        !isNaN(numValue) &&
-                        numValue >= 200 &&
-                        numValue <= 800
-                      ) {
+                      if (!isNaN(numValue) && numValue >= 200) {
                         setCanvasSize((prev) => ({ ...prev, width: numValue }));
                       }
                     }
@@ -194,31 +166,17 @@ export default function FlavorRatingApp() {
                     if (
                       value === '' ||
                       isNaN(parseInt(value)) ||
-                      parseInt(value) < 200 ||
-                      parseInt(value) > 800
+                      parseInt(value) < 200
                     ) {
                       setInputValues((prev) => ({ ...prev, width: '400' }));
                       setCanvasSize((prev) => ({ ...prev, width: 400 }));
                     }
                   }}
-                  style={{
-                    width: '80px',
-                    padding: '0.5rem',
-                    border: '1px solid #ddd',
-                    borderRadius: '4px',
-                  }}
+                  className="size-input"
                 />
               </div>
-              <div>
-                <label
-                  style={{
-                    display: 'block',
-                    marginBottom: '0.5rem',
-                    color: '#666',
-                  }}
-                >
-                  세로 (px):
-                </label>
+              <div className="input-group">
+                <label className="input-label">세로 (px):</label>
                 <input
                   type="text"
                   placeholder="250"
@@ -255,31 +213,19 @@ export default function FlavorRatingApp() {
                       setCanvasSize((prev) => ({ ...prev, height: 250 }));
                     }
                   }}
-                  style={{
-                    width: '80px',
-                    padding: '0.5rem',
-                    border: '1px solid #ddd',
-                    borderRadius: '4px',
-                  }}
+                  className="size-input"
                 />
               </div>
             </div>
           </div>
 
           {/* 평가 설정 */}
-          <div>
-            <h3 style={{ marginBottom: '1rem', color: '#555' }}>맛 평가</h3>
-            <div
-              style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}
-            >
+          <div className="rating-section">
+            <h3 className="section-title">맛 평가</h3>
+            <div className="rating-section">
               {categories.map(({ label, key, color }) => (
-                <div
-                  key={key}
-                  style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}
-                >
-                  <label
-                    style={{ color, fontWeight: 'bold', minWidth: '60px' }}
-                  >
+                <div key={key} className="rating-item">
+                  <label className="rating-label" style={{ color }}>
                     {label}:
                   </label>
                   <input
@@ -294,17 +240,9 @@ export default function FlavorRatingApp() {
                         [key]: parseFloat(e.target.value),
                       }))
                     }
-                    style={{ flex: 1 }}
+                    className="rating-slider"
                   />
-                  <span
-                    style={{
-                      marginLeft: '0.5rem',
-                      fontWeight: 'bold',
-                      color: color,
-                      minWidth: '30px',
-                      textAlign: 'center',
-                    }}
-                  >
+                  <span className="rating-value" style={{ color }}>
                     {ratings[key as keyof typeof ratings]}
                   </span>
                 </div>
@@ -312,69 +250,18 @@ export default function FlavorRatingApp() {
             </div>
           </div>
 
-          <button
-            onClick={downloadImage}
-            style={{
-              marginTop: '2rem',
-              padding: '0.75rem 1.5rem',
-              backgroundColor: '#007bff',
-              color: 'white',
-              border: 'none',
-              borderRadius: '4px',
-              cursor: 'pointer',
-              fontSize: '16px',
-              fontWeight: 'bold',
-            }}
-            onMouseOver={(e) =>
-              (e.currentTarget.style.backgroundColor = '#0056b3')
-            }
-            onMouseOut={(e) =>
-              (e.currentTarget.style.backgroundColor = '#007bff')
-            }
-          >
+          <button onClick={downloadImage} className="download-button">
             이미지 다운로드
           </button>
         </div>
 
-        {/* 오른쪽: 미리보기 */}
-        <div
-          style={{
-            background: '#f8f9fa',
-            padding: '1.5rem',
-            borderRadius: '8px',
-          }}
-        >
-          <h2 style={{ marginTop: 0, color: '#333' }}>미리보기</h2>
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              minHeight: '300px',
-              background: 'white',
-              borderRadius: '8px',
-              border: '2px dashed #ddd',
-            }}
-          >
-            <canvas
-              ref={canvasRef}
-              style={{
-                maxWidth: '100%',
-                maxHeight: '400px',
-                border: '1px solid #ccc',
-                borderRadius: '4px',
-                boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-              }}
-            />
+        {/* 미리보기 */}
+        <div className="preview-panel">
+          <h2 className="preview-title">미리보기</h2>
+          <div className="preview-container">
+            <canvas ref={canvasRef} className="canvas-element" />
           </div>
-          <div
-            style={{
-              marginTop: '1rem',
-              textAlign: 'center',
-              color: '#666',
-              fontSize: '14px',
-            }}
-          >
+          <div className="canvas-info">
             크기: {canvasSize.width} × {canvasSize.height} px
           </div>
         </div>
