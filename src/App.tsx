@@ -15,13 +15,13 @@ export default function FlavorRatingApp() {
   });
 
   const [canvasSize, setCanvasSize] = useState({
-    width: 800,
-    height: 250,
+    width: 2000,
+    height: 625,
   });
 
   const [inputValues, setInputValues] = useState({
-    width: '800',
-    height: '250',
+    width: '2000',
+    height: '625',
   });
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -146,14 +146,14 @@ export default function FlavorRatingApp() {
                 <label className="input-label">가로 (px):</label>
                 <input
                   type="text"
-                  placeholder="800"
+                  placeholder="2000"
                   value={inputValues.width}
                   onChange={(e) => {
                     const value = e.target.value;
                     setInputValues((prev) => ({ ...prev, width: value }));
 
                     if (value === '') {
-                      setCanvasSize((prev) => ({ ...prev, width: 800 }));
+                      setCanvasSize((prev) => ({ ...prev, width: 2000 }));
                     } else {
                       const numValue = parseInt(value);
                       if (!isNaN(numValue) && numValue >= 200) {
@@ -168,8 +168,8 @@ export default function FlavorRatingApp() {
                       isNaN(parseInt(value)) ||
                       parseInt(value) < 200
                     ) {
-                      setInputValues((prev) => ({ ...prev, width: '400' }));
-                      setCanvasSize((prev) => ({ ...prev, width: 400 }));
+                      setInputValues((prev) => ({ ...prev, width: '2000' }));
+                      setCanvasSize((prev) => ({ ...prev, width: 2000 }));
                     }
                   }}
                   className="size-input"
@@ -179,14 +179,14 @@ export default function FlavorRatingApp() {
                 <label className="input-label">세로 (px):</label>
                 <input
                   type="text"
-                  placeholder="250"
+                  placeholder="625"
                   value={inputValues.height}
                   onChange={(e) => {
                     const value = e.target.value;
                     setInputValues((prev) => ({ ...prev, height: value }));
 
                     if (value === '') {
-                      setCanvasSize((prev) => ({ ...prev, height: 250 }));
+                      setCanvasSize((prev) => ({ ...prev, height: 625 }));
                     } else {
                       const numValue = parseInt(value);
                       if (
@@ -209,8 +209,8 @@ export default function FlavorRatingApp() {
                       parseInt(value) < 150 ||
                       parseInt(value) > 600
                     ) {
-                      setInputValues((prev) => ({ ...prev, height: '250' }));
-                      setCanvasSize((prev) => ({ ...prev, height: 250 }));
+                      setInputValues((prev) => ({ ...prev, height: '625' }));
+                      setCanvasSize((prev) => ({ ...prev, height: 625 }));
                     }
                   }}
                   className="size-input"
