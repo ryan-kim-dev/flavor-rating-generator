@@ -242,6 +242,22 @@ export default function FlavorRatingApp() {
                     }
                     className="rating-slider"
                   />
+                  <input
+                    type="text"
+                    value={ratings[key as keyof typeof ratings]}
+                    onChange={(e) => {
+                      const valNum = parseFloat(e.target.value);
+                      if (valNum > 5 || valNum < 0)
+                        return alert('0~5 사이의 숫자만 입력해주세요.');
+                      if (valNum % 0.5 !== 0 && e.target.value !== '')
+                        return alert('0.5단위로 입력해주세요.');
+                      setRatings((prev) => ({
+                        ...prev,
+                        [key]: e.target.value,
+                      }));
+                    }}
+                    className="rating-number-input"
+                  />
                   <span className="rating-value" style={{ color }}>
                     {ratings[key as keyof typeof ratings]}
                   </span>
