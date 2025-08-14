@@ -24,6 +24,8 @@ export default function FlavorRatingApp() {
     height: '625',
   });
 
+  const [imageName, setImageName] = useState('');
+
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const drawImage = useCallback(() => {
@@ -109,19 +111,16 @@ export default function FlavorRatingApp() {
     drawImage();
   }, [drawImage]);
 
+  const handleImageName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const imageName = e.target.value;
+    setImageName(`${imageName}_맛평가`);
+  };
+
   const downloadImage = () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    // 현재 날짜와 시간으로 파일명 생성
-    const now = new Date();
-    const year = now.getFullYear();
-    const month = String(now.getMonth() + 1).padStart(2, '0');
-    const day = String(now.getDate()).padStart(2, '0');
-    const hours = String(now.getHours()).padStart(2, '0');
-    const minutes = String(now.getMinutes()).padStart(2, '0');
-
-    const filename = `flavor-rating-${year}${month}${day}-${hours}${minutes}.png`;
+    const filename = imageName;
 
     const link = document.createElement('a');
     link.download = filename;
@@ -137,6 +136,7 @@ export default function FlavorRatingApp() {
         {/* 설정 패널 */}
         <div className="settings-panel">
           <h2 className="settings-title">설정</h2>
+          <hr className="divider" />
 
           {/* 캔버스 크기 설정 */}
           <div className="image-size-section">
@@ -250,9 +250,24 @@ export default function FlavorRatingApp() {
             </div>
           </div>
 
-          <button onClick={downloadImage} className="download-button">
-            이미지 다운로드
-          </button>
+          {/* 액상명 입력 및 다운로드 */}
+          <div className="image-name-section">
+            <h3 className="section-title">이미지 저장</h3>
+            <form className="image-name-form" onSubmit={downloadImage}>
+              <input
+                type="text"
+                placeholder="액상명을 입력하세요"
+                onChange={handleImageName}
+                className="image-name-input"
+              />
+              <p className="image-name-hint">
+                액상명 뒤에 "_맛평가.png"로 저장됩니다.
+              </p>
+              <button type="submit" className="download-button">
+                이미지 다운로드
+              </button>
+            </form>
+          </div>
         </div>
 
         {/* 미리보기 */}
