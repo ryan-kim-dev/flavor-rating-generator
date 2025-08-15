@@ -11,6 +11,38 @@
   margin-bottom: 2rem;
 }
 
+/* 네비게이션 스타일 */
+.navigation {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.nav-link {
+  padding: 0.75rem 1.5rem;
+  text-decoration: none;
+  color: #007bff;
+  background: white;
+  border: 2px solid #007bff;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: all 0.2s;
+}
+
+.nav-link:hover {
+  background: #007bff;
+  color: white;
+}
+
+.nav-link.active {
+  background: #007bff;
+  color: white;
+}
+
 .app-layout {
   display: flex;
   gap: 2rem;
@@ -65,6 +97,18 @@
   padding: 0.5rem;
   border: 1px solid #ddd;
   border-radius: 4px;
+}
+
+.size-input.disabled {
+  background-color: #f5f5f5;
+  color: #666;
+  cursor: not-allowed;
+}
+
+.input-hint {
+  font-size: 12px;
+  color: #666;
+  margin-top: 0.25rem;
 }
 
 .rating-section {
@@ -209,4 +253,29 @@
 .image-name-form .download-button {
   margin-top: 1rem;
   width: 100%;
+}
+
+/* KC 인증마크 관련 스타일 */
+.certification-section {
+  margin-bottom: 2rem;
+}
+
+.certification-input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid #e9ecef;
+  border-radius: 6px;
+  font-size: 16px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  background-color: white;
+}
+
+.certification-input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+.certification-input::placeholder {
+  color: #adb5bd;
 }
