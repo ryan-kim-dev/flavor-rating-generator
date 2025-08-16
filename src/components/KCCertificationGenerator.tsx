@@ -121,7 +121,8 @@ export default function KCCertificationGenerator() {
     setImageName(`${imageName}_KC인증마크`);
   };
 
-  const downloadImage = () => {
+  const downloadImage = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     const canvas = canvasRef.current;
     if (!canvas) return;
 

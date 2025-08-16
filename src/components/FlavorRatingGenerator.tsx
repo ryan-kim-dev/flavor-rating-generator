@@ -115,7 +115,8 @@ export default function FlavorRatingGenerator() {
     setImageName(`${imageName}_맛평가`);
   };
 
-  const downloadImage = () => {
+  const downloadImage = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     const canvas = canvasRef.current;
     if (!canvas) return;
 
