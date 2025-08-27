@@ -1,8 +1,7 @@
 import { useRef, useEffect, useState, useCallback } from 'react';
 
 export default function KCCertificationGenerator() {
-  const [certificationNumber, setCertificationNumber] =
-    useState('YU102314-25001');
+  const [certificationNumber, setCertificationNumber] = useState('');
   const [canvasSize, setCanvasSize] = useState({
     width: 2000,
     height: 400,
@@ -39,8 +38,8 @@ export default function KCCertificationGenerator() {
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // 배경색 (연한 회색)
-    ctx.fillStyle = '#f8f9fa';
+    // 배경색 (흰색)
+    ctx.fillStyle = '#ffffff';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     // KC 로고 이미지 그리기 (왼쪽)
@@ -210,7 +209,7 @@ export default function KCCertificationGenerator() {
               <label className="input-label">KC 인증번호:</label>
               <input
                 type="text"
-                placeholder="YU102314-25001"
+                placeholder="KC인증번호를 입력하세요"
                 value={certificationNumber}
                 onChange={(e) => setCertificationNumber(e.target.value)}
                 className="certification-input"
